@@ -1,0 +1,42 @@
+{
+  // editor
+  "editor.wordWrap": "on", //quebrado de linha na largura da janela de visualização do editor
+  "editor.fontSize": 14, // Tamanho das fontes
+  "editor.lineHeight": 30, // Distancia das linhas
+  "editor.tabSize": 2, // Define o tamanho da tabulação como 2 espaços
+  "editor.bracketPairColorization.enabled": true, // Ativa a colorização dos pares de colchetes
+  "editor.guides.bracketPairs": true, //realça os pares de colchetes para facilitar a leitura do código
+  "editor.minimap.enabled": true, // Define se o minimapa esta ativo
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.autoSave": "afterDelay", // Salvamento automatico, PODE AFETAR EM ALGUNS CÓDIGOS DE EXECUÇÃO AUTOMÁTICA POR SAVE. "afterDelay"
+  "editor.find.seedSearchStringFromSelection": "always", // editor de busca e subistituição
+
+  // explorer
+  "explorer.compactFolders": false,
+
+  // workbench
+  "workbench.editor.enablePreview": false,
+
+  // prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.enable": true,
+  "prettier.singleQuote": false,
+  "prettier.tabWidth": 2,
+  "prettier.semi": false,
+
+  // terminal
+  "terminal.integrated.fontSize": 16, // Define o tamanho da fonte no terminal integrado do VS Code
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "source": "Git Bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "emmet.preferences": {},
+  "emmet.variables": {
+    "lang": "pt-br",
+    "charset": "UTF-8"
+  },
+  "liveServer.settings.port": 5502
+}
