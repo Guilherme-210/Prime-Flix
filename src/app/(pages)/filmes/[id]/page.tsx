@@ -16,7 +16,7 @@ interface PageProps {
   params: Promise<{ id: string }>
 }
 
-export default async function FilmePage({ params }: PageProps ) {
+export default async function FilmePage({ params }: PageProps) {
   const { id } = await params
 
   try {
@@ -28,6 +28,7 @@ export default async function FilmePage({ params }: PageProps ) {
     })
 
     const filme: Filme = res.data
+    console.log(res.data)
 
     const {
       backdrop_path,
@@ -37,6 +38,8 @@ export default async function FilmePage({ params }: PageProps ) {
       release_date,
       title,
       vote_average,
+      genres,
+      status,
     } = filme
 
     return (
@@ -78,6 +81,11 @@ export default async function FilmePage({ params }: PageProps ) {
               <Box className="flex-1">
                 <Typography variant="h4" fontWeight="bold" gutterBottom>
                   {title}
+                </Typography>
+
+                <Typography variant="body1" color="white" gutterBottom>
+                  Status:{" "}
+                  <span className="text-white font-medium">{status}</span>
                 </Typography>
 
                 <Typography variant="body1" color="white" gutterBottom>
@@ -143,6 +151,12 @@ export default async function FilmePage({ params }: PageProps ) {
                       Trailer
                     </Button>
                   </Link>
+                </Box>
+
+                <Box className="flex gap-4 mt-6">
+                  {genres.map((gender, key) => {
+                    return <p key={gender.id || key}>{gender.name}</p>
+                  })}
                 </Box>
               </Box>
             </Box>

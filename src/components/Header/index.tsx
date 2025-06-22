@@ -6,13 +6,14 @@ export default function Header() {
   return (
     <>
       <header className="flex flex-row gap-8 justify-around min-md:justify-between items-center px-10 py-2 bg-[#0b87e6]">
-        <div className="w-15 h-15 relative">
+        <div className="relative">
           <Link href={routes.home} className="cursor-pointer">
             <Image
               src="/LogoPrimeFlix.png"
               alt="Imagem do jogo Dying Light"
-              fill
-              className="object-cover rounded-md"
+              width={60}
+              height={60}
+              className="object-cover rounded-md "
               unoptimized
             />
           </Link>

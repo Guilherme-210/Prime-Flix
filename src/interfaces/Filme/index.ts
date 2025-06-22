@@ -1,7 +1,7 @@
 export interface Filme {
   adult: boolean
   backdrop_path: string | null
-  genre_ids: number[]
+  genres: { id: number; name: string }[]
   id: number
   original_language: string
   original_title: string
@@ -13,6 +13,7 @@ export interface Filme {
   video: boolean
   vote_average: number
   vote_count: number
+  status: string
 }
 
 export default Filme
