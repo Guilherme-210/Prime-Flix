@@ -1,7 +1,13 @@
+// import Error from "./(pages)/Error"
+
 export const routes = {
   home: "/",
   filmes: "/filmes",
-  filme: (id: string | number) => `/filmes/${id}`,
   series: "/series",
+
+  filme: (id: string | number) => `/filmes/${id}`,
   serie: (id: string | number) => `/series/${id}`,
+
+  
 } as const
+
