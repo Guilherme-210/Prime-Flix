@@ -12,13 +12,15 @@ import {
 } from "@mui/material"
 import Link from "next/link"
 
-export default async function FilmePage({
-  params,
-}: {
-  params: { id: string }
-}) {
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function FilmePage({ params }: PageProps ) {
+  const { id } = await params
+
   try {
-    const res = await filmesAPI.get(`/movie/${params.id}`, {
+    const res = await filmesAPI.get(`/movie/${id}`, {
       params: {
         api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
         language: "pt-BR",
