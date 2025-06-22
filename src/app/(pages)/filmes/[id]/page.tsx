@@ -1,52 +1,165 @@
-"use client"
-
 import { notFound } from "next/navigation"
-import { useEffect, useState } from "react"
 import filmesAPI from "@/services/api/filmes"
-import { CircularProgress } from "@mui/material"
 import Filme from "@/interfaces/Filme"
+import {
+  Box,
+  CardMedia,
+  Typography,
+  Rating,
+  Container,
+  Divider,
+  Button,
+} from "@mui/material"
+import Link from "next/link"
 
-export default function FilmePage({ params }: { params: { id: string } }) {
-  const [filme, setFilme] = useState<Filme | null>(null)
-  const [loading, setLoading] = useState(true)
+export default async function FilmePage({
+  params,
+}: {
+  params: { id: string }
+}) {
+  try {
+    const res = await filmesAPI.get(`/movie/${params.id}`, {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: "pt-BR",
+      },
+    })
 
-  useEffect(() => {
-    async function getFilme() {
-      try {
-        const res = await filmesAPI.get(`/movie/${params.id}`, {
-          params: {
-            api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
-            language: "pt-br",
-          },
-        })
+    const filme: Filme = res.data
 
-        setFilme(res.data)
-      } catch (error) {
-        console.error("Erro ao buscar filme:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
+    const {
+      backdrop_path,
+      overview,
+      popularity,
+      poster_path,
+      release_date,
+      title,
+      vote_average,
+    } = filme
 
-    getFilme()
-  }, [params.id])
-
-  if (loading) {
     return (
-      <div className="w-full h-[100vh] flex items-center justify-center">
-        <CircularProgress disableShrink size={100} />
-      </div>
-    )
-  }
+      <main className="min-h-screen text-white">
+        <CardMedia
+          component="img"
+          image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+          alt={`Capa do filme ${title}`}
+          sx={{
+            width: "100%",
+            maxHeight: "500px",
+            objectFit: "cover",
+            zIndex: "0",
+            position: "absolute",
+            opacity: "50%",
+          }}
+        />
 
-  if (!filme) {
+        <Container
+          maxWidth="md"
+          className="flex flex-col gap-6 z-10 absolute pt-100 items-center inset-0"
+        >
+          <div>
+            <Box className="flex gap-6 flex-col sm:flex-row items-center sm:items-start">
+              <CardMedia
+                component="img"
+                image={`https://image.tmdb.org/t/p/w300/${
+                  poster_path || backdrop_path
+                }`}
+                alt={`Capa do filme ${title}`}
+                sx={{
+                  width: "200px",
+                  borderTopLeftRadius: "12px",
+                  borderTopRightRadius: "12px",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                }}
+              />
+
+              <Box className="flex-1">
+                <Typography variant="h4" fontWeight="bold" gutterBottom>
+                  {title}
+                </Typography>
+
+                <Typography variant="body1" color="white" gutterBottom>
+                  Lançamento:{" "}
+                  <span className="text-white font-medium">
+                    {new Date(release_date).toLocaleDateString("pt-BR")}
+                  </span>
+                </Typography>
+
+                <Typography variant="body1" color="white" gutterBottom>
+                  Popularidade:{" "}
+                  <span className="text-white font-medium">{popularity}</span>
+                </Typography>
+
+                <Box className="flex items-center gap-2 mt-2">
+                  <Rating
+                    name="read-only"
+                    value={vote_average / 2}
+                    precision={0.5}
+                    readOnly
+                  />
+                  <Typography variant="body2">
+                    {vote_average.toFixed(1)} / 10
+                  </Typography>
+                </Box>
+
+                <Box className="flex gap-4 mt-6">
+                  <Button
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      fontWeight: "bold",
+                      px: 4,
+                      py: 1.5,
+                      borderRadius: 2,
+                      backgroundColor: "#2196f3",
+                      color: "#fff",
+                      "&:hover": {
+                        backgroundColor: "#1976d2",
+                      },
+                    }}
+                  >
+                    Salvar
+                  </Button>
+
+                  <Link href={"#"} passHref>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        px: 4,
+                        py: 1.5,
+                        borderRadius: 2,
+                        borderColor: "#2196f3",
+                        color: "#2196f3",
+                        "&:hover": {
+                          backgroundColor: "#2196f3",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      Trailer
+                    </Button>
+                  </Link>
+                </Box>
+              </Box>
+            </Box>
+
+            <Divider sx={{ borderColor: "#555" }} />
+
+            {/* Descrição */}
+            <Typography variant="h6" fontWeight="bold">
+              Sinopse
+            </Typography>
+            <Typography variant="body1" color="gray">
+              {overview || "Sem descrição disponível."}
+            </Typography>
+          </div>
+        </Container>
+      </main>
+    )
+  } catch (err) {
+    console.error("Erro ao buscar filme:", err)
     notFound()
   }
-
-  return (
-    <main className="p-8">
-      <h2 className="text-3xl font-bold mb-4">{filme?.title}</h2>
-      <p>{filme?.overview}</p>
-    </main>
-  )
 }
