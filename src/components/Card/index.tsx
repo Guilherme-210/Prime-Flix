@@ -1,25 +1,103 @@
+import { useState } from "react"
+import { routes } from "@/app/routes"
 import Filme from "@/interfaces/Filme"
-import Image from "next/image"
+import {
+  Button,
+  CircularProgress,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActions,
+  Box,
+} from "@mui/material"
+import Link from "next/link"
 
 interface CardFilmProps {
   filme: Filme
 }
 
 export default function CardFilm({ filme }: CardFilmProps) {
+  const [imageLoading, setImageLoading] = useState(true)
+
   return (
-    <>
-      <div className="flex flex-col p-4 m-6 gap-5 bg-[#45adfc] rounded-md overflow-hidden shadow-lg transition hover:scale-[1.01] hover:shadow-xl">
-        <div className="relative w-full h-64">
-          <Image
-            src={`https://image.tmdb.org/t/p/original/${filme.backdrop_path}`}
-            alt={`Capa do filme ${filme.title}`}
-            fill
-            unoptimized
-            className="object-cover"
-          />
-        </div>
-        <h3 className="text-white text-xl font-semibold">{filme.title}</h3>
-      </div>
-    </>
+    <Card
+      sx={{
+        maxWidth: 220,
+        height: 420,
+        backgroundColor: "#121212",
+        color: "#fff",
+        borderRadius: 2,
+        boxShadow: 3,
+        overflow: "hidden",
+        position: "relative",
+        transition: "transform 0.2s ease-in-out, box-shadow 0.2s",
+        "&:hover": {
+          transform: "scale(1.03)",
+          boxShadow: 6,
+        },
+      }}
+    >
+      {/* Imagem com Loader */}
+      <Box sx={{ position: "relative", height: 320 }}>
+        {imageLoading && (
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              bgcolor: "rgba(255,255,255,0.1)",
+              zIndex: 1,
+            }}
+          >
+            <CircularProgress color="secondary" size={40} thickness={6} />
+          </Box>
+        )}
+        <CardMedia
+          component="img"
+          image={`https://image.tmdb.org/t/p/w300/${filme.poster_path}`}
+          alt={`Capa do filme ${filme.title}`}
+          onLoad={() => setImageLoading(false)}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8,
+          }}
+        />
+      </Box>
+
+      {/* Botão */}
+      <CardActions
+        sx={{ backgroundColor: "#2196f3", justifyContent: "center" }}
+      >
+        <Link href={routes.filme(filme.id)} passHref>
+          <Button size="small" sx={{ color: "#fff", fontWeight: "bold" }}>
+            SOBRE
+          </Button>
+        </Link>
+      </CardActions>
+
+      {/* Título */}
+      <CardContent sx={{ textAlign: "center", p: 1 }}>
+        <Typography
+          variant="subtitle1"
+          sx={{
+            fontWeight: 600,
+            fontSize: "1rem",
+            lineHeight: 1.4,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {filme.title}
+        </Typography>
+      </CardContent>
+    </Card>
   )
 }

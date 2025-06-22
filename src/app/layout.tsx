@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Filmes e Serier Prime Flix",
+  title: "Filmes e Series Prime Flix",
   description: "Site de filmes e series",
   icons: {
     icon: "/LogoPrimeFlix.png",

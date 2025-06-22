@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Header() {
   return (
     <>
-      <header className="flex flex-row gap-8 justify-around min-md:justify-between items-center px-4 py-2 bg-[#0b87e6]">
+      <header className="flex flex-row gap-8 justify-around min-md:justify-between items-center px-10 py-2 bg-[#0b87e6]">
         <div className="w-15 h-15 relative">
           <Link href={routes.home} className="cursor-pointer">
             <Image
@@ -21,20 +21,8 @@ export default function Header() {
           <Link className="hover:text-zinc-100 text-lg " href={routes.filmes}>
             filmes
           </Link>
-          <Link
-            className="hover:text-zinc-100 text-lg "
-            href={routes.filme(42)}
-          >
-            Ver filme
-          </Link>
           <Link className="hover:text-zinc-100 text-lg " href={routes.series}>
             series
-          </Link>
-          <Link
-            className="hover:text-zinc-100 text-lg "
-            href={routes.serie(162)}
-          >
-            Ver serie
           </Link>
         </nav>
       </header>
