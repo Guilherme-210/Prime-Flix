@@ -1,9 +1,9 @@
 export default function Serie() {
   return (
     <>
-      <main>
+      <section>
         <h2>Bem vindo aos detalhes do serie </h2>
-      </main>
+      </section>
     </>
   )
 }

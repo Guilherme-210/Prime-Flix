@@ -72,15 +72,15 @@ export default function CardFilm({ filme }: CardFilmProps) {
       </Box>
 
       {/* Botão */}
-      <CardActions
-        sx={{ backgroundColor: "#2196f3", justifyContent: "center" }}
-      >
-        <Link href={routes.filme(filme.id)} passHref>
+      <Link href={routes.filme(filme.id)} passHref>
+        <CardActions
+          sx={{ backgroundColor: "#2196f3", justifyContent: "center" }}
+        >
           <Button size="small" sx={{ color: "#fff", fontWeight: "bold" }}>
             SOBRE
           </Button>
-        </Link>
-      </CardActions>
+        </CardActions>
+      </Link>
 
       {/* Título */}
       <CardContent sx={{ textAlign: "center", p: 1 }}>

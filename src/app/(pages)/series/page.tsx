@@ -1,10 +1,9 @@
 export default function Series() {
   return (
     <>
-      <main>
+      <section>
         <h2>Bem vindo a lista de series</h2>
-        
-      </main>
+      </section>
     </>
   )
 }

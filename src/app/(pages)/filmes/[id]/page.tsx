@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material"
 import Link from "next/link"
+import { Play } from "lucide-react"
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -43,40 +44,53 @@ export default async function FilmePage({ params }: PageProps) {
     } = filme
 
     return (
-      <main className="min-h-screen text-white">
-        <CardMedia
-          component="img"
-          image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
-          alt={`Capa do filme ${title}`}
-          sx={{
-            width: "100%",
-            maxHeight: "500px",
-            objectFit: "cover",
-            zIndex: "0",
-            position: "absolute",
-            opacity: "50%",
-          }}
-        />
+      <section className="min-h-screen relative text-white ">
+        <div className="absolute itens-center inset-0 z-0">
+          <CardMedia
+            component="img"
+            image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+            alt={`Capa do filme ${title}`}
+            sx={{
+              width: "100%",
+              height: "40%",
+              objectFit: "cover",
+              opacity: 0.5,
+            }}
+          />
+        </div>
 
         <Container
           maxWidth="md"
-          className="flex flex-col gap-6 z-10 absolute pt-100 items-center inset-0"
+          className="relative z-10 flex flex-col gap-6 pt-17 items-center"
         >
           <div>
             <Box className="flex gap-6 flex-col sm:flex-row items-center sm:items-start">
-              <CardMedia
-                component="img"
-                image={`https://image.tmdb.org/t/p/w300/${
-                  poster_path || backdrop_path
-                }`}
-                alt={`Capa do filme ${title}`}
-                sx={{
-                  width: "200px",
-                  borderTopLeftRadius: "12px",
-                  borderTopRightRadius: "12px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
-                }}
-              />
+              <Link href={"#"} passHref>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderTopLeftRadius: "12px",
+                    borderTopRightRadius: "12px",
+                    borderColor: null,
+                    color: null,
+                    padding: "0",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={`https://image.tmdb.org/t/p/w300/${
+                      poster_path || backdrop_path
+                    }`}
+                    alt={`Capa do filme ${title}`}
+                    sx={{
+                      width: "200px",
+                      borderTopLeftRadius: "12px",
+                      borderTopRightRadius: "12px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                    }}
+                  />
+                </Button>
+              </Link>
 
               <Box className="flex-1">
                 <Typography variant="h4" fontWeight="bold" gutterBottom>
@@ -135,19 +149,22 @@ export default async function FilmePage({ params }: PageProps) {
                     <Button
                       variant="outlined"
                       sx={{
-                        textTransform: "none",
-                        fontWeight: "bold",
                         px: 4,
                         py: 1.5,
                         borderRadius: 2,
                         borderColor: "#2196f3",
                         color: "#2196f3",
+                        fontSize: 12,
+                        display: "flex",
+                        gap: 1,
+                        alignItems: "center",
                         "&:hover": {
                           backgroundColor: "#2196f3",
                           color: "#fff",
                         },
                       }}
                     >
+                      <Play className="size-4" />
                       Trailer
                     </Button>
                   </Link>
@@ -163,7 +180,6 @@ export default async function FilmePage({ params }: PageProps) {
 
             <Divider sx={{ borderColor: "#555" }} />
 
-            {/* Descrição */}
             <Typography variant="h6" fontWeight="bold">
               Sinopse
             </Typography>
@@ -172,7 +188,7 @@ export default async function FilmePage({ params }: PageProps) {
             </Typography>
           </div>
         </Container>
-      </main>
+      </section>
     )
   } catch (err) {
     console.error("Erro ao buscar filme:", err)

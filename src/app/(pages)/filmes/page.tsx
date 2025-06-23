@@ -32,17 +32,12 @@ export default function Filmes() {
     loadFilmes()
   }, [])
 
-  if(loading === true) {
-    return (
-      <div className="w-full h-[100vh] text-center content-center">
-        <CircularProgress disableShrink size={100} />
-      </div>
-    )
-  }
-
-  return (
+  return loading ? (
+    <div className="w-full min-h-[100vh] text-center content-center">
+      <CircularProgress disableShrink size={100} />
+    </div>
+  ) : (
     <>
-      <main>
         <section>
           <div className="grid grid-cols-5 max-md:grid-cols-3 max-sm:grid-cols-1 gap-8 px-12 py-5 max-md:p-6">
             {filmes.map((filme) => {
@@ -50,7 +45,6 @@ export default function Filmes() {
             })}
           </div>
         </section>
-      </main>
     </>
   )
 }

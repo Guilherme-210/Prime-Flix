@@ -1,9 +1,9 @@
 export default function Home() {
   return (
     <>
-      <main>
+      <section>
         <h2>Bem vindo a home</h2>
-      </main>
+      </section>
     </>
-  );
+  )
 }
