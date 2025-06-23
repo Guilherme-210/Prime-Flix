@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material"
 import Link from "next/link"
-import { Play } from "lucide-react"
+import { Play, PlayCircle } from "lucide-react"
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -65,31 +65,29 @@ export default async function FilmePage({ params }: PageProps) {
         >
           <div>
             <Box className="flex gap-6 flex-col sm:flex-row items-center sm:items-start">
-              <Link href={"#"} passHref>
-                <Button
-                  variant="outlined"
+              <Link
+                target="blank"
+                href={`https://www.youtube.com/results?search_query=Trailer ${title}`}
+                passHref
+                rel="external"
+                className="relative group w-[200px]"
+              >
+                <CardMedia
+                  component="img"
+                  image={`https://image.tmdb.org/t/p/w300/${
+                    poster_path || backdrop_path
+                  }`}
+                  alt={`Capa do filme ${title}`}
                   sx={{
+                    width: "200px",
                     borderTopLeftRadius: "12px",
                     borderTopRightRadius: "12px",
-                    borderColor: null,
-                    color: null,
-                    padding: "0",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
                   }}
-                >
-                  <CardMedia
-                    component="img"
-                    image={`https://image.tmdb.org/t/p/w300/${
-                      poster_path || backdrop_path
-                    }`}
-                    alt={`Capa do filme ${title}`}
-                    sx={{
-                      width: "200px",
-                      borderTopLeftRadius: "12px",
-                      borderTopRightRadius: "12px",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
-                    }}
-                  />
-                </Button>
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-tl-[12px] rounded-tr-[12px]">
+                  <PlayCircle className="text-white size-15" />
+                </div>
               </Link>
 
               <Box className="flex-1">
@@ -145,7 +143,12 @@ export default async function FilmePage({ params }: PageProps) {
                     Salvar
                   </Button>
 
-                  <Link href={"#"} passHref>
+                  <Link
+                    target="blank"
+                    href={`https://www.youtube.com/results?search_query=Trailer ${title}`}
+                    passHref
+                    rel="external"
+                  >
                     <Button
                       variant="outlined"
                       sx={{
