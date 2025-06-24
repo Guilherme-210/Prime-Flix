@@ -47,6 +47,8 @@ export default async function FilmePage({ params }: PageProps) {
           image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         />
 
+        
+
         <Container
           maxWidth="md"
           className="relative z-10 flex flex-col gap-6 pt-24 items-center"
@@ -70,7 +72,7 @@ export default async function FilmePage({ params }: PageProps) {
 
               <MovieRating voteAverage={vote_average} />
 
-              <BoxButtons searchTrailer={title} />
+              <BoxButtons searchTrailer={title} filme={filme} />
 
               <RenderGenres genres={genres} />
             </Box>
