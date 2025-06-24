@@ -51,7 +51,18 @@ export default function BoxButtons({ searchTrailer, filme }: BoxButtonsProps) {
 
   return (
     <>
-      <Stack sx={{ width: "100%" }} spacing={2}>
+      <Stack
+        sx={{
+          position: "fixed",
+          top: 90,
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 9999,
+          width: "fit-content",
+          maxWidth: "90%",
+        }}
+        spacing={2}
+      >
         {alertType === "success" && (
           <Alert severity="success">
             <strong>Success:</strong> Filme salvo com sucesso! 🚀
