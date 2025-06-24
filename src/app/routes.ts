@@ -8,6 +8,5 @@ export const routes = {
   filme: (id: string | number) => `/filmes/${id}`,
   serie: (id: string | number) => `/series/${id}`,
 
-  
+  favoritesList: "/favoriteslist",
 } as const
-

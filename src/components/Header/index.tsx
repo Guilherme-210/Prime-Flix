@@ -19,6 +19,9 @@ export default function Header() {
           </Link>
         </div>
         <nav className="flex flex-row gap-8 text-black  ">
+          <Link className="hover:text-zinc-100 text-lg " href={routes.favoritesList}>
+            minha lista
+          </Link>
           <Link className="hover:text-zinc-100 text-lg " href={routes.filmes}>
             filmes
           </Link>

@@ -9,7 +9,7 @@
   "editor.minimap.enabled": true, // Define se o minimapa esta ativo
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "files.autoSave": "afterDelay", // Salvamento automatico, PODE AFETAR EM ALGUNS CÓDIGOS DE EXECUÇÃO AUTOMÁTICA POR SAVE. "afterDelay"
+  "files.autoSave": "off", // Salvamento automatico, PODE AFETAR EM ALGUNS CÓDIGOS DE EXECUÇÃO AUTOMÁTICA POR SAVE. "afterDelay"
   "editor.find.seedSearchStringFromSelection": "always", // editor de busca e subistituição
 
   // explorer
