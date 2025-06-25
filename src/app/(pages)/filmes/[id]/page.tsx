@@ -26,7 +26,7 @@ export async function generateStaticParams() {
     id: String(filme.id),
   }))
 }
-export default async function FilmePage({ params }: { params: { id: string } }) {
+export default async function FilmePage({ params }: { params: { id: string | number } }) {
   const { id } = params
 
   try {
