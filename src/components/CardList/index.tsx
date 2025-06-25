@@ -4,9 +4,11 @@ import Filme from "@/interfaces/Filme"
 import PosterMovies from "../PosterMovies"
 import CircularProgressWithLabel from "./_components/CircularProgressWithLabel"
 import RenderGenres from "../RenderGenres"
-import { Calendar, List, Play, Star, X } from "lucide-react"
+import { Calendar, Star } from "lucide-react"
+// import { Calendar, List, Play, Star, X } from "lucide-react"
 import { useEffect, useState } from "react"
-import { Button, ButtonGroup } from "@mui/material"
+// import { Button, ButtonGroup } from "@mui/material"
+import ActionButtons from "./_components/ActionButtons"
 
 interface CardListProps {
   filme: Filme
@@ -119,24 +121,7 @@ export default function CardList({ filme }: CardListProps) {
           </div>
 
           <div className={"flex flex-row justify-between"}>
-            <ButtonGroup>
-              <Button className="gap-1">
-                <Star className="size-4" />
-                Avalie
-              </Button>
-              <Button className="gap-1">
-                <List className="size-4" />
-                Salvar
-              </Button>
-              <Button className="gap-1">
-                <Play className="size-4" />
-                Trailer
-              </Button>
-              <Button className="gap-1">
-                <X className="size-4" />
-                Remover
-              </Button>
-            </ButtonGroup>
+            <ActionButtons title={title} />
           </div>
         </div>
       </div>
