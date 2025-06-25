@@ -10,11 +10,25 @@ import RenderGenres from "@/components/RenderGenres"
 import MovieSynopsis from "@/components/MovieSynopsis"
 import BoxButtons from "@/components/BoxButtons"
 
-interface PageProps {
-  params: Promise<{ id: string }>
+// ✅ gerar as rotas estaticamente
+export async function generateStaticParams() {
+  // Exemplo: buscar alguns IDs de filmes populares para gerar estaticamente
+  const res = await filmesAPI.get("/movie/popular", {
+    params: {
+      api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+      language: "pt-BR",
+      page: 1,
+    },
+  })
+
+  // Ajuste conforme a estrutura do seu retorno
+  return res.data.results.map((filme: Filme) => ({
+    id: String(filme.id),
+  }))
 }
 
-export default async function FilmePage({ params }: PageProps) {
+// ✅ página da rota
+export default async function FilmePage({ params }: { params: { id: string } }) {
   const { id } = await params
 
   try {
@@ -46,8 +60,6 @@ export default async function FilmePage({ params }: PageProps) {
           alt={`Capa do filme ${title}`}
           image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         />
-
-        
 
         <Container
           maxWidth="md"
