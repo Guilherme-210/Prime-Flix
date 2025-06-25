@@ -26,10 +26,8 @@ export async function generateStaticParams() {
     id: String(filme.id),
   }))
 }
-
-// ✅ página da rota
 export default async function FilmePage({ params }: { params: { id: string } }) {
-  const { id } = await params
+  const { id } = params
 
   try {
     const res = await filmesAPI.get(`/movie/${id}`, {
