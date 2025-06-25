@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+
 import filmesAPI from "@/services/api/filmes"
 import Filme from "@/interfaces/Filme"
 import { Box, Container, Divider } from "@mui/material"
@@ -26,7 +27,8 @@ export async function generateStaticParams() {
     id: String(filme.id),
   }))
 }
-export default async function FilmePage({ params }: { params: { id: string | number } }) {
+
+export default async function FilmePage({ params }: { params: { id: string } }) {
   const { id } = params
 
   try {
@@ -52,6 +54,8 @@ export default async function FilmePage({ params }: { params: { id: string | num
       status,
     } = filme
 
+    console.log(filme
+    )
     return (
       <section className="min-h-screen relative text-white ">
         <CoverImage
