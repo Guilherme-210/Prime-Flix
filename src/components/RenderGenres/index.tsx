@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+"use client"
 
 interface RenderGenresProps {
   genres: { id: number; name: string }[]
@@ -6,17 +6,14 @@ interface RenderGenresProps {
 
 export default function RenderGenres({ genres }: RenderGenresProps) {
   return (
-    <>
-      <Box className="flex gap-4 mt-6">
-        {genres.map((gender, key) => (
-          <span
-            key={gender.id || key}
-            className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-sm hover:bg-blue-500 transition duration-200"
-          >
-            {gender.name}
+    <div className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory w-full">
+      {genres.map((genre, index) => (
+        <div key={genre.id || index} className="flex-shrink-0 snap-center">
+          <span className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-medium px-3 py-1.5 rounded-full whitespace-nowrap shadow-sm hover:shadow-md transition-shadow duration-200">
+            {genre.name}
           </span>
-        ))}
-      </Box>
-    </>
+        </div>
+      ))}
+    </div>
   )
 }

@@ -4,9 +4,10 @@ interface PosterMoviesProps {
   href: string
   image: string
   alt: string
+  widthImage: () => string
 }
 
-export default function PosterMovies({ image, alt }: PosterMoviesProps) {
+export default function PosterMovies({ image, alt, widthImage }: PosterMoviesProps) {
   return (
     <>
       <CardMedia
@@ -14,7 +15,7 @@ export default function PosterMovies({ image, alt }: PosterMoviesProps) {
         image={image}
         alt={alt}
         sx={{
-          width: "200px",
+          width: widthImage(),
           borderTopLeftRadius: "12px",
           borderBottomLeftRadius: "12px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
