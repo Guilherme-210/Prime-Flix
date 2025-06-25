@@ -28,9 +28,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function FilmePage({ params }: { params: { id: string } }) {
-  const resolvedParams = await Promise.resolve(params)
-  const { id } = resolvedParams
+export default async function FilmePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
 
   try {
     const res = await filmesAPI.get(`/movie/${id}`, {
