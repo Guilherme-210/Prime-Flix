@@ -3,7 +3,6 @@
 import Filme from "@/interfaces/Filme"
 import { Alert, Button, ButtonGroup, Stack } from "@mui/material"
 import { Play } from "lucide-react"
-import Link from "next/link"
 import { useState } from "react"
 
 interface BoxButtonsProps {
@@ -22,7 +21,6 @@ export default function BoxButtons({ searchTrailer, filme }: BoxButtonsProps) {
       setAlertType(null)
     }, 3000)
   }
-
 
   const filmeSave = () => {
     try {
@@ -48,7 +46,6 @@ export default function BoxButtons({ searchTrailer, filme }: BoxButtonsProps) {
     }
   }
 
-
   return (
     <>
       <Stack
@@ -64,35 +61,24 @@ export default function BoxButtons({ searchTrailer, filme }: BoxButtonsProps) {
         spacing={2}
       >
         {alertType === "success" && (
-          <Alert severity="success">
-            <strong>Success:</strong> Filme salvo com sucesso! 🚀
-          </Alert>
+          <Alert severity="success">Filme salvo com sucesso! 🚀</Alert>
         )}
         {alertType === "warning" && (
-          <Alert severity="warning">
-            <strong>Warning:</strong> Esse filme já está na sua lista!
-          </Alert>
+          <Alert severity="warning">Esse filme já está na sua lista!</Alert>
         )}
         {alertType === "error" && (
-          <Alert severity="error">
-            <strong>Error:</strong> Erro ao salvar o filme!
-          </Alert>
+          <Alert severity="error">Erro ao salvar o filme!</Alert>
         )}
       </Stack>
 
-      <ButtonGroup
-        variant="contained"
-        aria-label="Basic button group"
-        className="flex mt-6"
-      >
+      <ButtonGroup variant="contained" className="mt-6 flex flex-wrap">
         <Button
-          onClick={() => filmeSave()}
-          variant="contained"
+          onClick={filmeSave}
           sx={{
             textTransform: "none",
             fontWeight: "bold",
-            px: 4,
-            py: 1.4,
+            px: { xs: 2, sm: 4 },
+            py: { xs: 1, sm: 1.4 },
             borderRadius: 2,
             backgroundColor: "#2196f3",
             color: "#fff",
@@ -104,34 +90,30 @@ export default function BoxButtons({ searchTrailer, filme }: BoxButtonsProps) {
           Salvar
         </Button>
 
-        <Link
-          target="blank"
+        <Button
           href={`https://www.youtube.com/results?search_query=Trailer ${searchTrailer}`}
-          passHref
+          target="_blank"
           rel="external"
+          variant="outlined"
+          sx={{
+            px: { xs: 2, sm: 4 },
+            py: { xs: 1, sm: 1.4 },
+            borderRadius: 2,
+            borderColor: "#2196f3",
+            color: "#2196f3",
+            fontSize: 12,
+            display: "flex",
+            gap: 1,
+            alignItems: "center",
+            "&:hover": {
+              backgroundColor: "#2196f3",
+              color: "#fff",
+            },
+          }}
         >
-          <Button
-            variant="outlined"
-            sx={{
-              px: 4,
-              py: 1.5,
-              borderRadius: 2,
-              borderColor: "#2196f3",
-              color: "#2196f3",
-              fontSize: 12,
-              display: "flex",
-              gap: 1,
-              alignItems: "center",
-              "&:hover": {
-                backgroundColor: "#2196f3",
-                color: "#fff",
-              },
-            }}
-          >
-            <Play className="size-4" />
-            Trailer
-          </Button>
-        </Link>
+          <Play className="size-4" />
+          Trailer
+        </Button>
       </ButtonGroup>
     </>
   )

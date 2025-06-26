@@ -5,10 +5,11 @@ export default function ScrollingTitle({ title }: { title: string }) {
   return (
     <Box
       sx={{
+        display: "flex",
         overflow: "hidden",
         whiteSpace: "nowrap",
         position: "relative",
-        width: "100%", // define a largura do container
+        width: "100%", 
         height: "3rem",
       }}
     >
@@ -16,7 +17,7 @@ export default function ScrollingTitle({ title }: { title: string }) {
         variant="h4"
         fontWeight="bold"
         gutterBottom
-        className="scrolling-title"
+        className="scrolling-title inline-block text-xl sm:text-2xl md:text-3xl font-bold text-white"        
       >
         {title}
       </Typography>

@@ -11,4 +11,5 @@
   display: inline-block;
   white-space: nowrap;
   animation: scroll-text 12s linear infinite;
+  max-width: 100%;
 }

@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation"
-
 import filmesAPI from "@/services/api/filmes"
 import Filme from "@/interfaces/Filme"
 import { Box, Container, Divider } from "@mui/material"
@@ -10,8 +9,8 @@ import MovieRating from "@/components/MovieRating"
 import RenderGenres from "@/components/RenderGenres"
 import MovieSynopsis from "@/components/MovieSynopsis"
 import BoxButtons from "@/components/BoxButtons"
+import ScrollingTitle from "@/components/ScrollingTitle"
 
-// ✅ gerar as rotas estaticamente
 export async function generateStaticParams() {
   const res = await filmesAPI.get("/movie/popular", {
     params: {
@@ -26,7 +25,11 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function FilmePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function FilmePage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
   const { id } = await params
 
   try {
@@ -38,7 +41,6 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
     })
 
     const filme: Filme = res.data
-    console.log(res.data)
 
     const {
       backdrop_path,
@@ -52,10 +54,8 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
       status,
     } = filme
 
-    console.log(filme
-    )
     return (
-      <section className="min-h-screen relative text-white ">
+      <section className="min-h-screen relative text-white bg-black max-w-screen">
         <CoverImage
           alt={`Capa do filme ${title}`}
           image={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
@@ -63,9 +63,11 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
 
         <Container
           maxWidth="md"
-          className="relative z-10 flex flex-col gap-6 pt-24 items-center"
+          className="relative z-10 flex flex-col gap-8 pt-24 px-4 sm:px-6 lg:px-8"
         >
-          <Box className="flex gap-6 flex-col sm:flex-row items-center sm:items-start">
+
+          {/* Conteúdo principal */}
+          <Box className="flex flex-row gap-8  sm:items-start items-center">
             <PosterPlayLink
               href={`https://www.youtube.com/results?search_query=Trailer ${title}`}
               image={`https://image.tmdb.org/t/p/w300/${
@@ -74,7 +76,9 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
               alt={`Capa do filme ${title}`}
             />
 
-            <Box className="flex-1">
+            <Box className="flex-1 flex flex-col gap-2">
+              <ScrollingTitle title={title} />
+              
               <MovieInfo
                 title={title}
                 status={status}
@@ -86,14 +90,14 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
 
               <BoxButtons searchTrailer={title} filme={filme} />
 
-              <div className="mt-4">
-                <RenderGenres genres={genres} />
-              </div>
+              <RenderGenres genres={genres} />
             </Box>
           </Box>
 
-          <Divider sx={{ borderColor: "#555", width: "100%" }} />
+          {/* Divisor */}
+          <Divider sx={{ borderColor: "#555" }} />
 
+          {/* Sinopse */}
           <MovieSynopsis synopsis={overview} />
         </Container>
       </section>
