@@ -88,11 +88,13 @@ export default async function FilmePage({ params }: { params: Promise<{ id: stri
 
               <BoxButtons searchTrailer={title} filme={filme} />
 
-              <RenderGenres genres={genres} />
+              <div className="mt-4">
+                <RenderGenres genres={genres} />
+              </div>
             </Box>
           </Box>
 
-          <Divider sx={{ borderColor: "#555" }} />
+          <Divider sx={{ borderColor: "#555", width: "100%" }} />
 
           <MovieSynopsis synopsis={overview} />
         </Container>

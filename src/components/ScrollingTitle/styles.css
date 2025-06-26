@@ -1,0 +1,14 @@
+@keyframes scroll-text {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.scrolling-title {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-text 12s linear infinite;
+}
