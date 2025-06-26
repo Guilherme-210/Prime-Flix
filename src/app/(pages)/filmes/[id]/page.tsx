@@ -13,7 +13,6 @@ import BoxButtons from "@/components/BoxButtons"
 
 // ✅ gerar as rotas estaticamente
 export async function generateStaticParams() {
-  // Exemplo: buscar alguns IDs de filmes populares para gerar estaticamente
   const res = await filmesAPI.get("/movie/popular", {
     params: {
       api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
@@ -22,7 +21,6 @@ export async function generateStaticParams() {
     },
   })
 
-  // Ajuste conforme a estrutura do seu retorno
   return res.data.results.map((filme: Filme) => ({
     id: String(filme.id),
   }))
